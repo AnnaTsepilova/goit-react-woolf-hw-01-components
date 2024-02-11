@@ -1,92 +1,74 @@
-# React homework template
+# Профіль соціальної мережі
 
-This project was created with
-[Create React App](https://github.com/facebook/create-react-app). To get
-acquainted and configure additional features
-[refer to documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Необхідно створити компонент `<Profile>`, за допомогою якого ми могли б
+відображати інформацію про користувача соціальної мережі. Дані про користувача
+лежать у файлі user.json.
 
-## Creating a repository by template
+## Опис компонента `<Profile>`
 
-Use this GoIT repository as a template for creating a repository of your
-project. To use it just tap the `«Use this template»` button and choose
-`«Create a new repository»` option, as you can see on the image below.
+Компонент повинен приймати кілька пропсів з інформацією про користувача:
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+- `username` — ім'я користувача
+- `tag` — тег в соціальній мережі без `@`
+- `location` — місто і країна
+- `avatar` — посилання на зображення
+- `stats` — об'єкт з інформацією про активності
 
-The page for creating a new repository will open on the next step. Fill out the
-Name field and make sure the repository is public, then click
-`«Create repository from template»` button.
+# Секція статистики
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+Створити компонент `<Statistics>`, який би відображав статистику з переданих
+пропсів. Наприклад, завантаження у хмару за типом файлів, відвідування
+веб-сторінки користувачами різних країн, фінансові витрати тощо. Дані про
+статистику лежать у файлі data.json.
 
-You now have a personal project repository, having a repository-template file
-and folder structure. After that, you can work with it as you would with any
-other private repository: clone it on your computer, write code, commit, and
-send it to GitHub.
+## Опис компонента
 
-## Preparing for coding
+Компонент повинен приймати два пропи `title` і `stats`, в яких вказується
+заголовок та об'єкт статистики.
 
-1. Make sure you have an LTS version of Node.js installed on your computer.
-   [Download and install](https://nodejs.org/en/) if needed.
-2. Install the project's base dependencies with the `npm install` command.
-3. Start development mode by running the `npm start` command.
-4. Go to [http://localhost:3000](http://localhost:3000) in your browser. This
-   page will automatically reload after saving changes to the project files.
+- `title` – не обов'язковий, і якщо він не переданий, не повинна рендеритись
+  розмітка заголовка `<h2>`.
+- `stats` – масив об'єктів, що містять інформацію про елемент статистики. Може
+  мати довільну кількість елементів.
+- Колір фону елемента статистики в оформленні можна пропустити або створити
+  функцію для генерації випадкового кольору.
 
-## Deploy
+# Список друзів
 
-The production version of the project will automatically be linted, built, and
-deployed to GitHub Pages, in the `gh-pages` branch, every time the `main` branch
-is updated. For example, after a direct push or an accepted pull request. To do
-this, you need to edit the `homepage` field in the `package.json` file,
-replacing `your_username` and `your_repo_name` with your own, and submit the
-changes to GitHub.
+Необхідно створити компонент `<FriendList>`, за допомогою якого ми могли б
+відображати інформацію про друзів користувача. Інформація про друзів
+зберігається у файлі friends.json.
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+## Опис компонента `<FriendList>`
 
-Next, you need to go to the settings of the GitHub repository (`Settings` >
-`Pages`) and set the distribution of the production version of files from the
-`/root` folder of the `gh-pages` branch, if this was not done automatically.
+Компонент повинен приймати один проп `friends` – масив об'єктів друзів.
 
-![GitHub Pages settings](./assets/repo-settings.png)
+## Опис компонента `<FriendListItem>`
 
-### Deployment status
+Компонент повинен приймати кілька пропів:
 
-The deployment status of the latest commit is displayed with an icon next to its
-ID.
+- `avatar` – посилання на аватар
+- `name` – ім'я друга
+- `isOnline` – буль, що сигналізує про стан друга: в мережі або ні.
 
-- **Yellow color** - the project is being built and deployed.
-- **Green color** - deployment completed successfully.
-- **Red color** - an error occurred during linting, build or deployment.
+Залежно від пропа `isOnline`, повинен змінюватися колір фону `span.status`. Це
+можна зробити за допомогою різних CSS-класів або Styled Components.
 
-More detailed information about the status can be viewed by clicking on the
-icon, and in the drop-down window, follow the link `Details`.
+# Історія транзакцій
 
-![Deployment status](./assets/deploy-status.png)
+Необхідно створити компонент історії транзакцій в особистому кабінеті
+інтернет-банку.
 
-### Live page
+Дані для списку доступні у форматі JSON у файлі transactions.json. Це масив
+об'єктів, кожен об'єкт описує одну транзакцію з наступними властивостями:
 
-After some time, usually a couple of minutes, the live page can be viewed at the
-address specified in the edited `homepage` property. For example, here is a link
-to a live version for this repository
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+- `id` — унікальний ідентифікатор транзакції
+- `type` — тип транзакції
+- `amount` - сума транзакції
+- `currency` - тип валюти
 
-If a blank page opens, make sure there are no errors in the `Console` tab
-related to incorrect paths to the CSS and JS files of the project (**404**). You
-most likely have the wrong value for the `homepage` property in the
-`package.json` file.
+## Опис компонента `<TransactionHistory>`
 
-### Routing
-
-If your application uses the `react-router-dom` library for routing, you must
-additionally configure the `<BrowserRouter>` component by passing the exact name
-of your repository in the `basename` prop. Slashes at the beginning and end of
-the line are required.
-
-```jsx
-<BrowserRouter basename="/your_repo_name/">
-  <App />
-</BrowserRouter>
-```
+Необхідно створити компонент `<TransactionHistory>`, який приймає один проп
+`items` – масив об'єктів транзакцій з `transactions.json`. Компонент створює
+розмітку таблиці. Кожна транзакція – це рядок таблиці.
