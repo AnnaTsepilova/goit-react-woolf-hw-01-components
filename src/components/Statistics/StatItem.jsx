@@ -1,5 +1,5 @@
 import css from './Statistics.module.css';
-import { getRandomHexColor } from './getRandomHexColor';
+import { getRandomHexColor } from '../../helpers/getRandomHexColor';
 
 const StatItem = ({ statLabel, statPercentage }) => {
   return (
